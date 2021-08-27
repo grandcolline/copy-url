@@ -3,8 +3,10 @@
   "name": "Copy URL",
   "version": "1.0.0",
   "description": "いい感じでURLをコピーする",
-  "permissions": ["contextMenus", "tabs", "http://*/*", "https://*/*"],
+  "permissions": ["contextMenus"],
   "background": {
-    "scripts": ["js/background.js"]
+    "matches": ["https://www.youtube.com/*", "https://www.amazon.co.jp/*"],
+    "scripts": ["js/background.js"],
+    "persistent": false
   }
 }
