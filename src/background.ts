@@ -101,6 +101,7 @@ chrome.runtime.onInstalled.addListener((): void => {
   chrome.contextMenus.create({
     id: "copyurl",
     title: "いい感じでURLをコピー",
+    documentUrlPatterns: ["https://www.youtube.com/*", "https://www.amazon.co.jp/*"]
   });
 });
 
