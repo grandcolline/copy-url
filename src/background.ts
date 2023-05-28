@@ -1,5 +1,5 @@
-import { Amazon } from './checkers/amazon';
-import { Youtube } from './checkers/youtube';
+import { Amazon } from './shorteners/amazon';
+import { Youtube } from './shorteners/youtube';
 import { copyToClipboard } from './utils/copyToClipboard';
 import { URLShortener } from './utils/urlShortener';
 

@@ -1,4 +1,4 @@
-import { Shortener, MyURL } from '../checkers/checker';
+import { Shortener, URLToBeShorten } from '../shorteners/shortener';
 
 export class URLShortener {
   checkers: Shortener[];
@@ -8,7 +8,7 @@ export class URLShortener {
   }
 
   shortenIfPossible(pageUrl: string): string {
-    const url = new MyURL(pageUrl);
+    const url = new URLToBeShorten(pageUrl);
 
     for (const checker of this.checkers) {
       if (checker.canShorten(url)) {
