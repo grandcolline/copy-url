@@ -2,6 +2,7 @@ import { Amazon } from './checkers/amazon';
 import { MyURL } from './checkers/checker';
 import { Youtube } from './checkers/youtube';
 import { copyToClipboard } from './utils/copyToClipboard';
+import { URLShortener } from './utils/urlShortener';
 
 // ContextMenu(右クリックメニュー)に追加
 chrome.runtime.onInstalled.addListener((): void => {
@@ -23,12 +24,18 @@ chrome.contextMenus.onClicked.addListener(
   ): void => {
     const url = new MyURL(info.pageUrl);
 
-    url.replace(new Youtube());
-    url.replace(new Amazon());
+    const shortener = new URLShortener([
+      new Youtube(),
+      new Amazon(),
+      // Add a new checker for a new site here
+    ]);
+
+    const shortenedURL = shortener.shortenIfPossible(url);
+
     if (tab?.id === undefined) {
       console.log('tab.id is undefined');
       return;
     }
-    copyToClipboard(tab.id, url.format());
+    copyToClipboard(tab.id, shortenedURL.format());
   }
 );

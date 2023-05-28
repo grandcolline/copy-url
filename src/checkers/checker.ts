@@ -1,9 +1,6 @@
-/**
- * Struct
- */
 export interface Checker {
-  check(url: MyURL): boolean;
-  replace(url: MyURL): MyURL;
+  canShorten(url: MyURL): boolean;
+  shorten(url: MyURL): MyURL;
 }
 
 /**
@@ -14,8 +11,8 @@ export class MyURL extends URL {
    * URLを変換
    */
   replace(c: Checker) {
-    if (c.check(this)) {
-      const url = c.replace(this);
+    if (c.canShorten(this)) {
+      const url = c.shorten(this);
       this.host = url.hostname;
       this.pathname = url.pathname;
       this.search = url.search;
