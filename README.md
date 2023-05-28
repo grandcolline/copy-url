@@ -12,7 +12,7 @@ It copies the URL to the clipboard, excluding query strings and other parameters
 1. (First time only) Open chrome://extensions/ in Chrome and load the built Chrome extension.
 1. Open the context menu (right-click or any other method to display the menu) while on the supported site mentioned above, and click on `いい感じでURLをコピー`.
 
-### Contributing
+## Contributing
 
 ```bash
 # install packages
