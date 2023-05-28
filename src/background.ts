@@ -1,28 +1,28 @@
 class Youtube implements Checker {
   check(url: MyURL): boolean {
     return (
-      (url.hostname.endsWith("youtube.com") ||
-        url.hostname.endsWith("youtu.be")) &&
-      url.pathname === "/watch" &&
-      url.searchParams.has("v")
+      (url.hostname.endsWith('youtube.com') ||
+        url.hostname.endsWith('youtu.be')) &&
+      url.pathname === '/watch' &&
+      url.searchParams.has('v')
     );
   }
 
   replace(url: MyURL): MyURL {
-    url.host = "youtu.be";
-    url.pathname = url.searchParams.get("v")!!;
-    url.searchParams.delete("feature");
-    url.searchParams.delete("v");
+    url.host = 'youtu.be';
+    url.pathname = url.searchParams.get('v') || '';
+    url.searchParams.delete('feature');
+    url.searchParams.delete('v');
     return url;
   }
 }
 
 class Amazon implements Checker {
-  regex = new RegExp("/dp/[A-Z0-9]{10}", "g");
+  regex = new RegExp('/dp/[A-Z0-9]{10}', 'g');
 
   check(url: MyURL): boolean {
     return (
-      url.hostname.endsWith("amazon.co.jp") && this.regex.test(url.pathname)
+      url.hostname.endsWith('amazon.co.jp') && this.regex.test(url.pathname)
     );
   }
 
@@ -41,11 +41,11 @@ class Amazon implements Checker {
  * copyToClipboard
  */
 const copyToClipboard = (text: string) => {
-  const textArea = document.createElement("textarea");
+  const textArea = document.createElement('textarea');
   document.body.appendChild(textArea);
   textArea.value = text;
   textArea.select();
-  document.execCommand("copy");
+  document.execCommand('copy');
   document.body.removeChild(textArea);
 };
 
@@ -66,7 +66,7 @@ class MyURL extends URL {
    */
   replace(c: Checker) {
     if (c.check(this)) {
-      let url = c.replace(this);
+      const url = c.replace(this);
       this.host = url.hostname;
       this.pathname = url.pathname;
       this.search = url.search;
@@ -78,14 +78,14 @@ class MyURL extends URL {
    * Searchを削除する
    */
   deleteSearch() {
-    this.search = "";
+    this.search = '';
   }
 
   /**
    * Hashを削除する
    */
   deleteHash() {
-    this.hash = "";
+    this.hash = '';
   }
 
   /**
@@ -99,14 +99,17 @@ class MyURL extends URL {
 // ContextMenu(右クリックメニュー)に追加
 chrome.runtime.onInstalled.addListener((): void => {
   chrome.contextMenus.create({
-    id: "copyurl",
-    title: "いい感じでURLをコピー",
-    documentUrlPatterns: ["https://www.youtube.com/*", "https://www.amazon.co.jp/*"]
+    id: 'copyurl',
+    title: 'いい感じでURLをコピー',
+    documentUrlPatterns: [
+      'https://www.youtube.com/*',
+      'https://www.amazon.co.jp/*',
+    ],
   });
 });
 
 // 処理
-chrome.contextMenus.onClicked.addListener((info, _): void => {
+chrome.contextMenus.onClicked.addListener((info): void => {
   const url = new MyURL(info.pageUrl);
 
   url.replace(new Youtube());
