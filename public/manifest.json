@@ -1,12 +1,16 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Copy URL",
   "version": "1.0.0",
   "description": "いい感じでURLをコピーする",
-  "permissions": ["contextMenus"],
+  "permissions": ["contextMenus", "scripting"],
+  "action": {},
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://www.amazon.co.jp/*"
+  ],
   "background": {
     "matches": ["https://www.youtube.com/*", "https://www.amazon.co.jp/*"],
-    "scripts": ["js/background.js"],
-    "persistent": false
+    "service_worker": "js/background.js"
   }
 }

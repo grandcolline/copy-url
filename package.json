@@ -5,6 +5,7 @@
   "repository": "https://github.com/grandcolline/copy-url",
   "scripts": {
     "build": "npx webpack --mode production",
+    "dev": "npx webpack --mode production --watch",
     "lint": "run-p -l --aggregate-output lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check .",
@@ -17,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/chrome": "0.0.129",
+    "@types/chrome": "^0.0.237",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
     "copy-webpack-plugin": "^7.0.0",
