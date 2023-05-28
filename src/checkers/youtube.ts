@@ -13,8 +13,7 @@ export class Youtube implements Shortener {
   shorten(url: MyURL): MyURL {
     url.host = 'youtu.be';
     url.pathname = url.searchParams.get('v') || '';
-    url.searchParams.delete('feature');
-    url.searchParams.delete('v');
+    url.deleteSearch();
     return url;
   }
 }
