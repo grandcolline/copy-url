@@ -1,25 +1,12 @@
-export interface Checker {
+export interface Shortener {
   canShorten(url: MyURL): boolean;
   shorten(url: MyURL): MyURL;
 }
 
 /**
- * URLクラスを継承したクラス
+ * potential URL to be shortened
  */
 export class MyURL extends URL {
-  /**
-   * URLを変換
-   */
-  replace(c: Checker) {
-    if (c.canShorten(this)) {
-      const url = c.shorten(this);
-      this.host = url.hostname;
-      this.pathname = url.pathname;
-      this.search = url.search;
-      this.hash = url.hash;
-    }
-  }
-
   /**
    * Searchを削除する
    */
@@ -37,7 +24,7 @@ export class MyURL extends URL {
   /**
    * URLをデコードして表示
    */
-  format(): string {
+  decode(): string {
     return decodeURIComponent(this.toString());
   }
 }

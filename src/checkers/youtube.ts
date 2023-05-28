@@ -1,6 +1,6 @@
-import { Checker, MyURL } from './checker';
+import { Shortener, MyURL } from './checker';
 
-export class Youtube implements Checker {
+export class Youtube implements Shortener {
   canShorten(url: MyURL): boolean {
     return (
       (url.hostname.endsWith('youtube.com') ||

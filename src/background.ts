@@ -1,5 +1,4 @@
 import { Amazon } from './checkers/amazon';
-import { MyURL } from './checkers/checker';
 import { Youtube } from './checkers/youtube';
 import { copyToClipboard } from './utils/copyToClipboard';
 import { URLShortener } from './utils/urlShortener';
@@ -16,26 +15,23 @@ chrome.runtime.onInstalled.addListener((): void => {
   });
 });
 
-// 処理
+const shortener = new URLShortener([
+  new Youtube(),
+  new Amazon(),
+  // Add a new checker for a new site here
+]);
+
+// ContextMenu(右クリックメニュー)がクリックされたときの処理
 chrome.contextMenus.onClicked.addListener(
   (
     info: chrome.contextMenus.OnClickData,
     tab: chrome.tabs.Tab | undefined
   ): void => {
-    const url = new MyURL(info.pageUrl);
-
-    const shortener = new URLShortener([
-      new Youtube(),
-      new Amazon(),
-      // Add a new checker for a new site here
-    ]);
-
-    const shortenedURL = shortener.shortenIfPossible(url);
-
     if (tab?.id === undefined) {
-      console.log('tab.id is undefined');
+      console.error('tab.id is undefined');
       return;
     }
-    copyToClipboard(tab.id, shortenedURL.format());
+    const shortenedURL = shortener.shortenIfPossible(info.pageUrl);
+    copyToClipboard(tab.id, shortenedURL);
   }
 );

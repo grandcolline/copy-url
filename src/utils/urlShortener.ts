@@ -1,20 +1,22 @@
-import { Checker, MyURL } from '../checkers/checker';
+import { Shortener, MyURL } from '../checkers/checker';
 
 export class URLShortener {
-  checkers: Checker[];
+  checkers: Shortener[];
 
-  constructor(checkers: Checker[]) {
+  constructor(checkers: Shortener[]) {
     this.checkers = checkers;
   }
 
-  shortenIfPossible(url: MyURL): MyURL {
+  shortenIfPossible(pageUrl: string): string {
+    const url = new MyURL(pageUrl);
+
     for (const checker of this.checkers) {
       if (checker.canShorten(url)) {
-        return checker.shorten(url);
+        return checker.shorten(url).decode();
       }
     }
 
     // Return as it is if the URL is not supported
-    return url;
+    return url.decode();
   }
 }

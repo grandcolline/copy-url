@@ -1,6 +1,6 @@
-import { Checker, MyURL } from './checker';
+import { Shortener, MyURL } from './checker';
 
-export class Amazon implements Checker {
+export class Amazon implements Shortener {
   regex = new RegExp('/dp/[A-Z0-9]{10}', 'g');
 
   canShorten(url: MyURL): boolean {
@@ -11,7 +11,7 @@ export class Amazon implements Checker {
 
   shorten(url: MyURL): MyURL {
     const newPath = url.pathname.match(this.regex);
-    if (newPath && newPath?.length == 1) {
+    if (newPath && newPath?.length === 1) {
       url.pathname = newPath[0];
       url.deleteSearch();
       url.deleteHash();
