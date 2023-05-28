@@ -5,6 +5,7 @@
   "repository": "https://github.com/grandcolline/copy-url",
   "scripts": {
     "build": "npx webpack --mode production",
+    "dev": "npx webpack --mode production --watch",
     "lint": "run-p -l --aggregate-output lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check .",
