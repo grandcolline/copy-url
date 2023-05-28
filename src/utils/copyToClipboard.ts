@@ -1,9 +1,17 @@
+export const copyToClipboard = (tabId: number, text: string) => {
+  function injectedFunction(text: string) {
+    try {
+      navigator.clipboard.writeText(text);
+    } catch (e) {
+      console.log('failed to copy text to clipboard');
+    }
+  }
 
-export const copyToClipboard = (text: string) => {
-  const textArea = document.createElement('textarea');
-  document.body.appendChild(textArea);
-  textArea.value = text;
-  textArea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textArea);
+  // workaround: service worker does not have document object,
+  // and clipboard api cannot be used from service worker
+  chrome.scripting.executeScript({
+    target: { tabId },
+    func: injectedFunction,
+    args: [text],
+  });
 };
