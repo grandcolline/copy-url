@@ -1,17 +1,17 @@
-import { Checker, MyURL } from './checker';
+import { Shortener, URLToBeShorten } from './shortener';
 
-export class Amazon implements Checker {
+export class Amazon implements Shortener {
   regex = new RegExp('/dp/[A-Z0-9]{10}', 'g');
 
-  check(url: MyURL): boolean {
+  canShorten(url: URL): boolean {
     return (
       url.hostname.endsWith('amazon.co.jp') && this.regex.test(url.pathname)
     );
   }
 
-  replace(url: MyURL): MyURL {
+  shorten(url: URLToBeShorten): URLToBeShorten {
     const newPath = url.pathname.match(this.regex);
-    if (newPath && newPath?.length == 1) {
+    if (newPath && newPath?.length === 1) {
       url.pathname = newPath[0];
       url.deleteSearch();
       url.deleteHash();

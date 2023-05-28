@@ -1,7 +1,7 @@
-import { Checker, MyURL } from './checker';
+import { Shortener, URLToBeShorten } from './shortener';
 
-export class Youtube implements Checker {
-  check(url: MyURL): boolean {
+export class Youtube implements Shortener {
+  canShorten(url: URL): boolean {
     return (
       (url.hostname.endsWith('youtube.com') ||
         url.hostname.endsWith('youtu.be')) &&
@@ -10,11 +10,10 @@ export class Youtube implements Checker {
     );
   }
 
-  replace(url: MyURL): MyURL {
+  shorten(url: URLToBeShorten): URLToBeShorten {
     url.host = 'youtu.be';
     url.pathname = url.searchParams.get('v') || '';
-    url.searchParams.delete('feature');
-    url.searchParams.delete('v');
+    url.deleteSearch();
     return url;
   }
 }
