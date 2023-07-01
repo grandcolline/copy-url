@@ -11,9 +11,10 @@ export class Youtube implements Shortener {
   }
 
   shorten(url: URLToBeShorten): URLToBeShorten {
-    url.host = 'youtu.be';
-    url.pathname = url.searchParams.get('v') || '';
-    url.deleteSearch();
-    return url;
+    const shorten = new URLToBeShorten(url.toString());
+    shorten.host = 'youtu.be';
+    shorten.pathname = shorten.searchParams.get('v') || '';
+    shorten.deleteSearch();
+    return shorten;
   }
 }
