@@ -41,9 +41,9 @@ jobs:
     if: >-
       ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'src/') || contains(github.event.commits.*.modified, 'src/') || contains(github.event.commits.*.removed, 'src/') }} ||
       ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'public/') || contains(github.event.commits.*.modified, 'public/') || contains(github.event.commits.*.removed, 'public/') }} ||
-      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package.json/') || contains(github.event.commits.*.modified, 'package.json/') || contains(github.event.commits.*.removed, 'package.json/') }} ||
-      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package-lock.json/') || contains(github.event.commits.*.modified, 'package-lock.json/') || contains(github.event.commits.*.removed, 'package-lock.json/') }} ||
-      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package-lock.json/') || contains(github.event.commits.*.modified, 'package-lock.json/') || contains(github.event.commits.*.removed, 'package-lock.json/') }}
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package.json') || contains(github.event.commits.*.modified, 'package.json') || contains(github.event.commits.*.removed, 'package.json') }} ||
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package-lock.json') || contains(github.event.commits.*.modified, 'package-lock.json') || contains(github.event.commits.*.removed, 'package-lock.json') }} ||
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'webpack.config.js') || contains(github.event.commits.*.modified, 'webpack.config.js') || contains(github.event.commits.*.removed, 'webpack.config.js') }}
     runs-on: 'ubuntu-latest'
     timeout-minutes: 5
     steps:
