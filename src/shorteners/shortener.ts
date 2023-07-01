@@ -8,21 +8,21 @@ export interface Shortener {
  */
 export class URLToBeShorten extends URL {
   /**
-   * delete search
+   * Delete search
    */
   deleteSearch() {
     this.search = '';
   }
 
   /**
-   * delete hash
+   * Delete hash
    */
   deleteHash() {
     this.hash = '';
   }
 
   /**
-   * decode URL
+   * Decode URL
    */
   decode(): string {
     return decodeURIComponent(this.toString());
