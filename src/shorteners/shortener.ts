@@ -8,21 +8,21 @@ export interface Shortener {
  */
 export class URLToBeShorten extends URL {
   /**
-   * Searchを削除する
+   * delete search
    */
   deleteSearch() {
     this.search = '';
   }
 
   /**
-   * Hashを削除する
+   * delete hash
    */
   deleteHash() {
     this.hash = '';
   }
 
   /**
-   * URLをデコードして表示
+   * decode URL
    */
   decode(): string {
     return decodeURIComponent(this.toString());
