@@ -32,3 +32,8 @@ npm run dev
 # lint and format
 npm run fix
 ```
+
+```bash
+# test
+npm run test
+```
