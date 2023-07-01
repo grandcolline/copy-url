@@ -7,10 +7,15 @@
   "action": {},
   "host_permissions": [
     "https://www.youtube.com/*",
-    "https://www.amazon.co.jp/*"
+    "https://www.amazon.co.jp/*",
+    "https://stackoverflow.com/*"
   ],
   "background": {
-    "matches": ["https://www.youtube.com/*", "https://www.amazon.co.jp/*"],
+    "matches": [
+      "https://www.youtube.com/*",
+      "https://www.amazon.co.jp/*",
+      "https://stackoverflow.com/*"
+    ],
     "service_worker": "js/background.js"
   }
 }
