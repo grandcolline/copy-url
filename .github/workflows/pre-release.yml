@@ -16,9 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  pre-release:
-    name: 'Pre Release'
-    runs-on: 'ubuntu-latest'
+  test:
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +34,31 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
+
+  pre-release:
+    name: 'Pre Release'
+    needs: test
+    if: >-
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'src/') || contains(github.event.commits.*.modified, 'src/') || contains(github.event.commits.*.removed, 'src/') }} ||
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'public/') || contains(github.event.commits.*.modified, 'public/') || contains(github.event.commits.*.removed, 'public/') }} ||
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package.json/') || contains(github.event.commits.*.modified, 'package.json/') || contains(github.event.commits.*.removed, 'package.json/') }} ||
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package-lock.json/') || contains(github.event.commits.*.modified, 'package-lock.json/') || contains(github.event.commits.*.removed, 'package-lock.json/') }} ||
+      ${{ github.event_name == 'push' && contains(github.event.commits.*.added, 'package-lock.json/') || contains(github.event.commits.*.modified, 'package-lock.json/') || contains(github.event.commits.*.removed, 'package-lock.json/') }}
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci
       - run: npm run build
       - name: zip
         run: zip -r copy-url.zip copy-url
