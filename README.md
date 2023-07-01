@@ -5,6 +5,7 @@ It copies the URL to the clipboard, excluding query strings and other parameters
 
 - [Amazon](https://www.amazon.co.jp/) [*Only compatible with amazon.co.jp]
 - [YouTube](https://www.youtube.com/)
+- [Stack Overflow](https://stackoverflow.com/)
 
 
 ## How to Use
