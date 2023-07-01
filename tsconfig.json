@@ -7,5 +7,5 @@
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["node_modules", "tests"]
+  "exclude": ["node_modules", "__tests__"]
 }

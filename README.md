@@ -1,5 +1,6 @@
 # copy-url
-This is a Chrome extension that allows you to copy URLs in a convenient (shortener) way. 
+
+This is a Chrome extension that allows you to copy URLs in a convenient (shortener) way.
 
 It copies the URL to the clipboard, excluding query strings and other parameters, from the following sites:
 
@@ -7,8 +8,8 @@ It copies the URL to the clipboard, excluding query strings and other parameters
 - [YouTube](https://www.youtube.com/)
 - [Stack Overflow](https://stackoverflow.com/)
 
-
 ## How to Use
+
 1. (First time only) Build this Chrome extension.
 1. (First time only) Open chrome://extensions/ in Chrome and load the built Chrome extension.
 1. Open the context menu (right-click or any other method to display the menu) while on the supported site mentioned above, and click on `いい感じでURLをコピー`.
