@@ -4,7 +4,7 @@ import { Youtube } from './shorteners/youtube';
 import { copyToClipboard } from './utils/copyToClipboard';
 import { URLShortener } from './utils/urlShortener';
 
-// Add copy-url into ContextMenu
+// Add 'copy-url' into ContextMenu
 chrome.runtime.onInstalled.addListener((): void => {
   chrome.contextMenus.create({
     id: 'copyurl',
@@ -25,7 +25,7 @@ const shortener = new URLShortener([
   // Add a new checker for a new site here
 ]);
 
-// On click copy-url in ContextMenu
+// On click 'copy-url' in ContextMenu
 chrome.contextMenus.onClicked.addListener(
   (
     info: chrome.contextMenus.OnClickData,
