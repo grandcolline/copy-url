@@ -19,9 +19,10 @@ export class StackOverflow implements Shortener {
   }
 
   shorten(url: URLToBeShorten): URLToBeShorten {
-    url.pathname = '/q/' + url.pathname.split('/')[2];
-    url.deleteSearch();
-    url.deleteHash();
-    return url;
+    const shorten = new URLToBeShorten(url.toString());
+    shorten.pathname = '/q/' + url.pathname.split('/')[2];
+    shorten.deleteSearch();
+    shorten.deleteHash();
+    return shorten;
   }
 }

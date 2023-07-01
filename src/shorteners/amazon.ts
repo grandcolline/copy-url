@@ -10,12 +10,13 @@ export class Amazon implements Shortener {
   }
 
   shorten(url: URLToBeShorten): URLToBeShorten {
+    const shorten = new URLToBeShorten(url.toString());
     const newPath = url.pathname.match(this.regex);
     if (newPath && newPath?.length === 1) {
-      url.pathname = newPath[0];
-      url.deleteSearch();
-      url.deleteHash();
+      shorten.pathname = newPath[0];
+      shorten.deleteSearch();
+      shorten.deleteHash();
     }
-    return url;
+    return shorten;
   }
 }
