@@ -1,0 +1,46 @@
+name: pre-release
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'webpack.config.js'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pre-release:
+    name: 'Pre Release'
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: zip
+        run: zip -r copy-url.zip copy-url
+      - uses: softprops/action-gh-release@v1
+        with:
+          name: 'Development Build'
+          tag_name: ${{ github.event.pull_request.title }}
+          generate_release_notes: true
+          files: copy-url.zip
