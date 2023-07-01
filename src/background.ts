@@ -1,4 +1,5 @@
 import { Amazon } from './shorteners/amazon';
+import { StackOverflow } from './shorteners/stackoverflow';
 import { Youtube } from './shorteners/youtube';
 import { copyToClipboard } from './utils/copyToClipboard';
 import { URLShortener } from './utils/urlShortener';
@@ -11,6 +12,8 @@ chrome.runtime.onInstalled.addListener((): void => {
     documentUrlPatterns: [
       'https://www.youtube.com/*',
       'https://www.amazon.co.jp/*',
+      'https://stackoverflow.com/*',
+      // Add a new site here
     ],
   });
 });
@@ -18,6 +21,7 @@ chrome.runtime.onInstalled.addListener((): void => {
 const shortener = new URLShortener([
   new Youtube(),
   new Amazon(),
+  new StackOverflow(),
   // Add a new checker for a new site here
 ]);
 
